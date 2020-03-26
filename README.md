@@ -1,5 +1,5 @@
 # Kafka Producer API
-The following was discovered as part of building this project:
+Esse é um projeto que usa a stack de tecnologia Spring Boot para publicar eventos no Kafka.
 
 * The original package name 'io.brito.examples.kafka-producer-api' is invalid and this project uses 'io.brito.examples.kafkaproducerapi' instead.
 
