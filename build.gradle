@@ -1,0 +1,60 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id "com.github.sherter.google-java-format" version "0.8"
+}
+
+group = 'io.brito.examples'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '13'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	maven { url "https://repo.spring.io/milestone" }
+	maven { url "https://jitpack.io" }
+	maven { url "http://oss.jfrog.org/artifactory/oss-snapshot-local/" }
+	jcenter()
+	mavenCentral()
+}
+
+ext {
+	springFox = "3.0.0-SNAPSHOT"
+	commonsLang = "3.9"
+	javaFormat = "1.7"
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.kafka:spring-kafka'
+
+	compileOnly 'org.projectlombok:lombok'
+
+	compile "io.springfox:springfox-swagger2:${springFox}"
+	compile "io.springfox:springfox-swagger-ui:${springFox}"
+	compile "io.springfox:springfox-spring-webflux:${springFox}"
+	compile "org.apache.commons:commons-lang3:${commonsLang}"
+
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'io.projectreactor:reactor-test'
+}
+
+googleJavaFormat {
+	options style: 'AOSP'
+}
+
+verifyGoogleJavaFormat.dependsOn "googleJavaFormat"
+
+test {
+	useJUnitPlatform()
+}

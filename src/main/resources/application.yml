@@ -1,0 +1,7 @@
+kafka:
+  topic: my_topic
+server:
+  port: 8080
+spring:
+  application:
+    name: kafka-producer-api
